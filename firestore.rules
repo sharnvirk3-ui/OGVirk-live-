@@ -1,0 +1,75 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.email == 'ogvirk.live@gmail.com';
+    }
+
+    match /appSettings/{documentId} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidId(documentId);
+    }
+
+    match /games/{gameId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(gameId);
+    }
+    
+    match /errorLogs/{logId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(logId);
+    }
+    
+    match /youtubeVideos/{videoId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(videoId);
+    }
+    
+    match /ratings/{ratingId} {
+      allow read, write: if true;
+    }
+    
+    match /config/{documentId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+    
+    match /globalMedia/{documentId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+    
+    match /chatMessages/{messageId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    match /activeSessions/{sessionId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /presence/{userId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /userProfiles/{userId} {
+      allow read: if true;
+      allow write: if isSignedIn() && request.auth.uid == userId;
+    }
+  }
+}

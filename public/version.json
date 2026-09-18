@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "buildNumber": 100,
+  "title": "OGVirk Live Latest",
+  "releaseNotes": "• Stable Release v1.0.0\n• Upgraded PC Gaming Hub Core Engine\n• YouTube WebView Player and App Deep Links\n• Service Worker & Offline Support",
+  "downloadUrl": "https://ais-pre-os32fx7qjlc4mkoejkg2wc-8131187472.asia-southeast1.run.app",
+  "mandatory": false,
+  "minSupportedVersion": "1.0.0"
+}

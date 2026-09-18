@@ -1,0 +1,7 @@
+{
+  "name": "OGVirk Live",
+  "description": "A clean login page for OGVirk Live featuring Google Sign-In.",
+  "version": "1.0.0",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

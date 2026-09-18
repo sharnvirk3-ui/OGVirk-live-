@@ -1,0 +1,152 @@
+{
+  "entities": {
+    "Game": {
+      "title": "Game",
+      "description": "A game link on the dashboard",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "color": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "downloadUrl": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "role", "color"]
+    },
+    "ErrorLog": {
+      "title": "ErrorLog",
+      "description": "System error reports",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "description"]
+    },
+    "YoutubeVideo": {
+      "title": "YoutubeVideo",
+      "description": "YouTube video link",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "url": { "type": "string" },
+        "views": { "type": "string" },
+        "timeAgo": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "url", "views", "timeAgo"]
+    },
+    "Rating": {
+      "title": "Rating",
+      "description": "User feedback rating",
+      "type": "object",
+      "properties": {
+        "stars": { "type": "number" },
+        "feedback": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["stars"]
+    },
+    "HubConfig": {
+      "title": "HubConfig",
+      "description": "Configuration for the front hub",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "title": { "type": "string" },
+        "profilePhotoUrl": { "type": "string" },
+        "callNumber": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "youtubeSubscribers": { "type": "string" },
+        "fontFamily": { "type": "string" }
+      },
+      "required": ["name", "title"]
+    },
+    "ActiveSession": {
+      "title": "ActiveSession",
+      "description": "User active session details",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "lastActive": { "type": "string" }
+      },
+      "required": ["uid", "email", "lastActive"]
+    },
+    "Presence": {
+      "title": "Presence",
+      "description": "User online presence",
+      "type": "object",
+      "properties": {
+        "lastActive": { "type": "number" }
+      },
+      "required": ["lastActive"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile details including Date of Birth",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "dob": { "type": "string" }
+      },
+      "required": ["uid"]
+    },
+    "VersionInfo": {
+      "title": "VersionInfo",
+      "description": "App version and update details",
+      "type": "object",
+      "properties": {
+        "version": { "type": "string" },
+        "title": { "type": "string" },
+        "releaseNotes": { "type": "array" },
+        "apkUrl": { "type": "string" },
+        "downloadUrl": { "type": "string" },
+        "forceUpdate": { "type": "boolean" },
+        "releaseDate": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["version"]
+    }
+  },
+  "firestore": {
+    "/userProfiles/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Stores extended user profile information"
+    },
+    "/games/{gameId}": {
+      "schema": { "$ref": "#/entities/Game" },
+      "description": "Stores game links"
+    },
+    "/errorLogs/{logId}": {
+      "schema": { "$ref": "#/entities/ErrorLog" },
+      "description": "Stores system error logs"
+    },
+    "/youtubeVideos/{videoId}": {
+      "schema": { "$ref": "#/entities/YoutubeVideo" },
+      "description": "Stores youtube videos"
+    },
+    "/config/hub": {
+      "schema": { "$ref": "#/entities/HubConfig" },
+      "description": "Stores hub configuration"
+    },
+    "/activeSessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/ActiveSession" },
+      "description": "Stores user active sessions"
+    },
+    "/ratings/{ratingId}": {
+      "schema": { "$ref": "#/entities/Rating" },
+      "description": "Stores user ratings"
+    },
+    "/appSettings/versionInfo": {
+      "schema": { "$ref": "#/entities/VersionInfo" },
+      "description": "Stores application version and update notifications"
+    }
+  }
+}
